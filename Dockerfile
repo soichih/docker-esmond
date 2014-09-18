@@ -41,19 +41,19 @@ RUN service postgresql start && \
 #RUN echo 'root:esmond' | chpasswd
 #CMD ["/usr/bin/supervisord"]
 
+#just override Dockefile and do any admin stuff there
 #install sshd.. out of desperation.
-RUN yum -y install openssh-server
-RUN mkdir /var/run/sshd
-RUN echo 'root:esmond' | chpasswd
+#RUN yum -y install openssh-server
+#RUN mkdir /var/run/sshd
+#RUN echo 'root:esmond' | chpasswd
 #disable PAM or sshd won't let user in
-RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-RUN sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
+#RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+#RUN sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
 
 EXPOSE 80 22
 
 CMD service postgresql start && \
     service httpd start && \
-    service sshd start && \
     sleep 3 && \
     tail -f /var/log/httpd/error_log.log /var/log/esmond/esmond.log /var/log/esmond/django.log
-
+#service sshd start && \
