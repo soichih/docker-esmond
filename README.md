@@ -9,13 +9,11 @@ You can start one from spotify/cassandra if you don't have one.
 
 (Using /usr/local/cassandra1 for DB volume)
 
-You are most likely interested in building your own esmond instance that comes with admin user/pass and some esmond users. The
-easiest way to do this is simply build your own container using this container as a base image.. like
+You will need to build your own esmond instance that comes with admin user/pass and some esmond users using opensciencegrid/esmond container as the  base image, like..
 
 Dockerfile
-
 ```
-FROM soichih/esmond
+FROM opensciencegrid/esmond
 
 RUN yum -y install expect
 ADD superadmin.sh /tmp/superadmin.sh
@@ -27,7 +25,7 @@ RUN service postgresql start && \
         python esmond/manage.py add_timeseries_post_user perfsonar"
 ```
 
-superadmin.sh script can look like this.
+superadmin.sh script may look like following..
 
 ```
 #!/usr/bin/expect
@@ -40,8 +38,9 @@ interact
 
 ```
 
-esmond/manage.py createsuperuser command is an interactive command, which is why I am using "expect" command. You can then build your 
-container with
+I am using "expect" command here, because esmond/manage.py createsuperuser command is an interactive command and it won't let me pass user / pass via command line.
+
+You can then..
 
 ```
 docker build .
