@@ -33,6 +33,6 @@ RUN service postgresql start && \
 EXPOSE 80 22
 
 CMD service postgresql start && \
-    service httpd start
+    /usr/sbin/httpd -DFOREGROUND
     #sleep 3 && \
     #tail -f /var/log/httpd/error_log.log /var/log/esmond/esmond.log /var/log/esmond/django.log
