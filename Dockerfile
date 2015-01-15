@@ -1,4 +1,5 @@
 FROM centos:centos6
+
 MAINTAINER Soichi Hayashi <hayashis@iu.edu>
 #instruction from http://software.es.net/esmond/rpm_install.html
 
@@ -30,7 +31,7 @@ ENV ESMOND_ROOT /opt/esmond
 RUN service postgresql start && \
     scl enable python27 "cd /opt/esmond && source bin/activate && echo no | python esmond/manage.py syncdb"
 
-EXPOSE 80 22
+EXPOSE 80
 
 CMD service postgresql start && \
     service httpd start && \
