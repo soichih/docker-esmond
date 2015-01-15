@@ -33,6 +33,6 @@ RUN service postgresql start && \
 EXPOSE 80 22
 
 CMD service postgresql start && \
-    /usr/sbin/httpd -DFOREGROUND
+    scl enable python27 "/usr/sbin/httpd -D FOREGROUND"
     #sleep 3 && \
     #tail -f /var/log/httpd/error_log.log /var/log/esmond/esmond.log /var/log/esmond/django.log
